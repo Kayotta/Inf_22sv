@@ -10,7 +10,7 @@ while spielen:
     #Spielfigur auswählen
     spielerauswahl = 0
     while spielerauswahl not in (1,2,3):
-        spielerauswahl = int(input("[1]Schere [2]Stein [3]Papier/n"))
+        spielerauswahl = int(input("[1]Schere [2]Stein [3]Papier\n"))
     spielerfigur = figuren[spielerauswahl - 1]
 
     #Computerfigur auswählen
@@ -42,7 +42,7 @@ while spielen:
     time.sleep(1)
     entscheidung = ""
     while entscheidung not in ("y", "n"):
-        entscheidung = input ("/nNochmal spielen? [y]Ja [n]Nein")
+        entscheidung = input("\nNochmal spielen? [y]Ja [n]Nein")
 
     if entscheidung == "n":
         spielen = False
