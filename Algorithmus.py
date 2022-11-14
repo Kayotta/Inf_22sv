@@ -2,6 +2,8 @@ import time
 import random
 
 # Variablen
+import pygame
+
 figuren = ('Schere', 'Stein', 'Papier')
 spielen = True
 
