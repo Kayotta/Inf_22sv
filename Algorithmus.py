@@ -1,22 +1,28 @@
 import time
 import random
 
-#Variablen
+# Variablen
+import pygame
+
 figuren = ('Schere', 'Stein', 'Papier')
 spielen = True
 
 while spielen:
 
-    #Spielfigur auswählen
+    # Spielfigur auswählen
     spielerauswahl = 0
-    while spielerauswahl not in (1,2,3):
+    while spielerauswahl not in (1, 2, 3):
         spielerauswahl = int(input("[1]Schere [2]Stein [3]Papier\n"))
     spielerfigur = figuren[spielerauswahl - 1]
 
-    #Computerfigur auswählen
+    # Computerfigur auswählen
     computerfigur = figuren[random.randint(0, 2)]
 
-    #Sieger ermitteln
+    # Steinbild einfügen
+    if spielerfigur == "Stein":
+        pygame.image.load("stein.png")
+
+    # Sieger ermitteln
     if spielerfigur == computerfigur:
         print("Unentschieden")
     else:
@@ -38,7 +44,7 @@ while spielen:
             else:
                 print("Gewonnen")
 
-    #Restart
+    # Restart
     time.sleep(1)
     entscheidung = ""
     while entscheidung not in ("y", "n"):
@@ -46,6 +52,3 @@ while spielen:
 
     if entscheidung == "n":
         spielen = False
-
-
-
