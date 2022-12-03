@@ -3,26 +3,34 @@ import sys
 
 pygame.init()
 
-spielerfigur = "Stein"
+'''spielerfigur = "Stein"
 RED = (255, 0, 0)
-GREY = (150, 150, 150)
+GREY = (150, 150, 150)'''
+
+# Screen erstellen
 display = pygame.display.set_mode((800, 600))
 
+# Titel und Icon
+pygame.display.set_caption("Rock-Paper-Scissors")
+icon = pygame.image.load('rock-paper-scissors.png')
+pygame.display.set_icon(icon)
+pygame.display.update()
 
+# Game Loop
 while True:
     display.fill((100, 55, 255))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        # pygame.QUIT braucht es nicht
-    # Soundintegration
-    # pygame.mixer.init()  # initialisiere den Soundmixer
-    # sound_rooster = pygame.mixer.Sound("Filename mit Musik")  # rooster.wav
-    # sound_rooster.set_volume(1.0)  # setze die Lautstärke
 
-    # Stein
-    if spielerfigur == "Stein":
+        pygame.QUIT
+
+
+
+
+     # Stein
+    '''if spielerfigur == "Stein":
         pygame.image.load("stein.png")
     spielerfigur = pygame.image.load("stein.png")
     bildgroesse = spielerfigur.get_rect()
@@ -32,4 +40,4 @@ while True:
     print(bildgroesse.width)
     print(bildgroesse.height)
     display.blit(spielerfigur, (200, 205))
-    pygame.display.update()
+    pygame.display.update()'''
