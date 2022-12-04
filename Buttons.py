@@ -16,7 +16,7 @@ class Button():
         height = image.get_height()
         self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect
-        #self.rect.topleft = (x, y)
+        # self.rect.topleft = (x, y)
         self.clicked = False
 
     def draw(self):
@@ -34,6 +34,7 @@ class Button():
 
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
+
         # Button auf Screen zeichnen
         display.blit(self.image, (self.rect.x, self.rect.y))
         return action
@@ -43,20 +44,21 @@ start_button = Button(100, 200, start_img, 1)
 
 # Game Loop
 run = True
-while run == True:
+while run:
     display.fill((100, 55, 255))
 
-    if start_button.draw():
-        print('START')
+    start_button.draw()
+        # print('START')
 
-
-
-
+    # Eventhandler
     for event in pygame.event.get():
+        # Exit Game
         if event.type == pygame.QUIT:
-            sys.exit()
+            run = False
+            # sys.exit()
 
-        pygame.QUIT
+        # pygame.QUIT
+    pygame.display.update()
 
 
 
