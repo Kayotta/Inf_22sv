@@ -12,7 +12,7 @@ display = pygame.display.set_mode((800, 600))
 
 # Titel und Icon
 pygame.display.set_caption("Rock-Paper-Scissors")
-icon = pygame.image.load('rock-paper-scissors.png')
+icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
 pygame.display.update()
 

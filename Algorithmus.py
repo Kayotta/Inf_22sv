@@ -1,7 +1,6 @@
 import time
 import random
-
-# Variablen
+import Button
 import pygame
 
 figuren = ('Schere', 'Stein', 'Papier')
@@ -9,18 +8,25 @@ spielen = True
 
 while spielen:
 
+    # Spielerfigur
+    if Button.scissor_button.clicked == True:
+        spielerfigur = figuren[0]
+    elif Button.rock_button.clicked == True:
+        spielerfigur = figuren[1]
+    else:
+        spielerfigur = figuren[2]
     # Spielfigur auswählen
-    spielerauswahl = 0
+    '''spielerauswahl = 0
     while spielerauswahl not in (1, 2, 3):
         spielerauswahl = int(input("[1]Schere [2]Stein [3]Papier\n"))
-    spielerfigur = figuren[spielerauswahl - 1]
+    spielerfigur = figuren[spielerauswahl - 1]'''
 
     # Computerfigur auswählen
     computerfigur = figuren[random.randint(0, 2)]
 
     # Steinbild einfügen
-    if spielerfigur == "Stein":
-        pygame.image.load("stein.png")
+    '''if spielerfigur == "Stein":
+        pygame.image.load("stein.png")'''
 
     # Sieger ermitteln
     if spielerfigur == computerfigur:
@@ -43,6 +49,8 @@ while spielen:
                 print("Verloren")
             else:
                 print("Gewonnen")
+
+
 
     # Restart
     time.sleep(1)
