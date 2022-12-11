@@ -1,5 +1,0 @@
-
-# Soundintegration
-pygame.mixer.init()  # initialisiere den Soundmixer
-sound_rooster = pygame.mixer.Sound("Filename mit Musik")  # rooster.wav
-sound_rooster.set_volume(1.0)  # setze die Lautstärke
