@@ -1,5 +1,6 @@
 import pygame
 import sys
+import time
 
 pygame.init()
 
@@ -15,7 +16,7 @@ scissor_img = pygame.image.load('bilder/scissor.png').convert_alpha()
 
 
 # Klasse definieren
-class Button():
+class Buttons():
     def __init__(self, x, y, image, scale):
         width = image.get_width()
         height = image.get_height()
@@ -47,11 +48,11 @@ class Button():
 
 
 # Fälle definieren
-start_button = Button(305, 200, start_img, 3)
-exit_button = Button(550, 750, exit_img, 0.5)
-rock_button = Button(300, 200, rock_img, 0.5)
-paper_button = Button(500, 200, paper_img, 0.5)
-scissor_button = Button(700, 200, scissor_img, 0.5)
+start_button = Buttons(305, 200, start_img, 3)
+exit_button = Buttons(550, 750, exit_img, 0.5)
+rock_button = Buttons(300, 200, rock_img, 0.5)
+paper_button = Buttons(500, 200, paper_img, 0.5)
+scissor_button = Buttons(700, 200, scissor_img, 0.5)
 
 # Game Loop
 run = True
@@ -60,7 +61,11 @@ while run:
 
     start_button.draw()
     if start_button.clicked == True:
-        print('start')
+        start_button = Buttons(305, 200, start_img, 0)
+        rock_button.draw()
+        paper_button.draw()
+        scissor_button.draw()
+        pygame.display.update()
 
     # Eventhandler
     for event in pygame.event.get():
