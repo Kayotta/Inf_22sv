@@ -7,11 +7,11 @@ display = pygame.display.set_mode((800, 600))
 
 # Startbutton
 # Startbutton laden
-start_img = pygame.image.load('Start.png').convert_alpha()
-exit_img = pygame.image.load('exit.png').convert_alpha()
-rock_img = pygame.image.load('rock.png').convert_alpha()
-paper_img = pygame.image.load('paper.png').convert_alpha()
-scissor_img = pygame.image.load('scissor.png').convert_alpha()
+start_img = pygame.image.load('bilder/Start.png').convert_alpha()
+exit_img = pygame.image.load('bilder/exit.png').convert_alpha()
+rock_img = pygame.image.load('bilder/rock.png').convert_alpha()
+paper_img = pygame.image.load('bilder/paper.png').convert_alpha()
+scissor_img = pygame.image.load('bilder/scissor.png').convert_alpha()
 
 
 # Klasse definieren
