@@ -55,7 +55,7 @@ paper_button = Buttons(500, 200, paper_img, 0.5)
 scissor_button = Buttons(700, 200, scissor_img, 0.5)
 
 # Game Loop
-run = True
+'''run = True
 while run:
     display.fill((100, 55, 255))
 
@@ -75,4 +75,4 @@ while run:
             sys.exit()
 
         # pygame.QUIT
-    pygame.display.update()
+    pygame.display.update()'''

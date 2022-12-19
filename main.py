@@ -2,7 +2,6 @@ import pygame
 import sys
 import random
 import time
-#from Buttons import Button
 import Buttons
 
 pygame.init()
@@ -19,19 +18,21 @@ pygame.display.update()
 # Figuren initialisieren
 figuren = ["Schere", "Stein", "Papier"]
 
+RUNNING = True
 # Game Loop
-while True:
+while RUNNING:
     display.fill((100, 55, 255))
-
 
     # Startbildschirm und Startknopf kreieren
     Buttons.start_button.draw()
     if Buttons.start_button.clicked == True:
-        Buttons.start_button = Buttons.Button(305, 200, Buttons.start_img, 0)
+        Buttons.start_button = Buttons.Buttons(305, 200, Buttons.start_img, 0)
 
+    if Buttons.start_button.clicked == True:
         Buttons.rock_button.draw()
         Buttons.paper_button.draw()
         Buttons.scissor_button.draw()
+
 
      # Spielerfigur auswählen
     if Buttons.scissor_button.clicked == True:
@@ -46,7 +47,7 @@ while True:
     computerfigur = figuren[random.randint(0, 2)]
 
     # Sieger ermitteln
-    if spielerfigur == computerfigur:
+    '''if spielerfigur == computerfigur:
         print("Unentschieden")
     else:
         if spielerfigur == "Schere":
@@ -65,7 +66,7 @@ while True:
             if computerfigur == "Schere":
                 print("Verloren")
             else:
-                print("Gewonnen")
+                print("Gewonnen")'''
 
     # Eventhandler
     for event in pygame.event.get():
