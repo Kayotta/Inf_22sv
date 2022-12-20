@@ -22,7 +22,7 @@ class Buttons():
         height = image.get_height()
         self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
-        #self.rect.topleft = (x, y)
+        # self.rect.topleft = (x, y)
         self.rect.x = x
         self.rect.y = y
         self.clicked = False
@@ -49,7 +49,7 @@ class Buttons():
 
 # Fälle definieren
 start_button = Buttons(305, 200, start_img, 3)
-exit_button = Buttons(550, 750, exit_img, 0.5)
+exit_button = Buttons(500, 50, exit_img, 0.3)
 rock_button = Buttons(300, 200, rock_img, 0.5)
 paper_button = Buttons(500, 200, paper_img, 0.5)
 scissor_button = Buttons(700, 200, scissor_img, 0.5)

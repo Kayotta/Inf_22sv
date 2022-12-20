@@ -24,14 +24,24 @@ while RUNNING:
     display.fill((100, 55, 255))
 
     # Startbildschirm und Startknopf kreieren
+
+    Buttons.exit_button.draw()
     Buttons.start_button.draw()
-    if Buttons.start_button.clicked == True:
-        Buttons.start_button = Buttons.Buttons(305, 200, Buttons.start_img, 0)
+
+    if Buttons.exit_button.clicked == True:
+        sys.exit()
 
     if Buttons.start_button.clicked == True:
+        Buttons.start_button = Buttons.Buttons(305, 200, Buttons.start_img, 1)
+
+    # Knöpfe verschwinden wieder, weil sie nur erscheinen, während Start gedrückt wird
         Buttons.rock_button.draw()
         Buttons.paper_button.draw()
         Buttons.scissor_button.draw()
+        print("Funktioniert theoretisch")
+
+
+    # pygame.display.update()
 
 
      # Spielerfigur auswählen
