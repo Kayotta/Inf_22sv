@@ -16,9 +16,22 @@ icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
 pygame.display.update()
 
+# Text darstellen
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, True, text_col)
+    display.blit(img, (x, y))
+
+# Schriftart bestimmen
+font = pygame.font.SysFont("arialblack", 40)
+
+# Schriftfarbe bestimmen
+TEXT_COL = (0, 0, 0)
+
 # Game Loop
 while True:
     display.fill((100, 55, 255))
+
+    draw_text("Hello", font, TEXT_COL, 1, 1)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

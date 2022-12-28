@@ -27,7 +27,7 @@ class Buttons():
         self.rect.y = y
         self.clicked = False
 
-    def draw(self):
+    def draw(self, surface):
         action = False
 
         # Mausposition
@@ -51,22 +51,23 @@ class Buttons():
 # Fälle definieren
 start_button = Buttons(305, 200, start_img, 3)
 exit_button = Buttons(500, 50, exit_img, 0.3)
-rock_button = Buttons(300, 200, rock_img, 0.5)
-paper_button = Buttons(500, 200, paper_img, 0.5)
+rock_button = Buttons(100, 200, rock_img, 0.4)
+paper_button = Buttons(300, 180, paper_img, 0.6)
 scissor_button = Buttons(700, 200, scissor_img, 0.5)
 
 # Game Loop
-'''run = True
+run = True
 while run:
     display.fill((100, 55, 255))
 
-    start_button.draw()
+    '''start_button.draw()
     if start_button.clicked == True:
-        start_button = Buttons(305, 200, start_img, 0)
-        rock_button.draw()
-        paper_button.draw()
-        scissor_button.draw()
-        pygame.display.update()
+        start_button = Buttons(305, 200, start_img, 0)'''
+    rock_button.draw(display)
+    paper_button.draw(display)
+    scissor_button.draw(display)
+
+    pygame.display.update()
 
     # Eventhandler
     for event in pygame.event.get():
@@ -76,4 +77,4 @@ while run:
             sys.exit()
 
         # pygame.QUIT
-    pygame.display.update()'''
+    pygame.display.update()
