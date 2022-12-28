@@ -47,6 +47,7 @@ class Buttons():
         return action
 
 
+
 # Fälle definieren
 start_button = Buttons(305, 200, start_img, 3)
 exit_button = Buttons(500, 50, exit_img, 0.3)

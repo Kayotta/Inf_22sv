@@ -32,7 +32,7 @@ while RUNNING:
         sys.exit()
 
     if Buttons.start_button.clicked == True:
-        Buttons.start_button = Buttons.Buttons(305, 200, Buttons.start_img, 1)
+        Buttons.start_button = Buttons.Buttons(305, 200, Buttons.start_img, 0)
 
     # Knöpfe verschwinden wieder, weil sie nur erscheinen, während Start gedrückt wird
         Buttons.rock_button.draw()
