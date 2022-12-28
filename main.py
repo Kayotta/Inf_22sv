@@ -16,10 +16,11 @@ pygame.display.set_icon(icon)
 pygame.display.update()
 
 # Figuren initialisieren
-figuren = ["Schere", "Stein", "Papier"]
+figuren = [0, "Schere", "Stein", "Papier"]
 
 # Spielvariablen initialisieren
 game_state = "menu"
+spielerfigur = False
 
 RUNNING = True
 # Game Loop
@@ -37,39 +38,39 @@ while RUNNING:
     # Spielerfigur auswählen
     if game_state == "game":
         if Buttons.rock_button.draw(display):
-            spielerfigur = figuren[1]
-        if Buttons.paper_button.draw(display):
             spielerfigur = figuren[2]
+        if Buttons.paper_button.draw(display):
+            spielerfigur = figuren[3]
         if Buttons.scissor_button.draw(display):
-            spielerfigur = figuren[0]
+            spielerfigur = figuren[1]
         if Buttons.exit_button.draw(display):
             sys.exit()
 
 
     # Computerfigur auswählen
-    computerfigur = figuren[random.randint(0, 2)]
+        computerfigur = figuren[random.randint(1, 3)]
 
-    # Sieger ermitteln
-    '''if spielerfigur == computerfigur:
-        print("Unentschieden")
-    else:
-        if spielerfigur == "Schere":
-            if computerfigur == "Stein":
-                print("Verloren")
-            else:
-                print("Gewonnen")
+        # Sieger ermitteln
+        if spielerfigur == computerfigur:
+            print("Unentschieden")
+        else:
+            if spielerfigur == "Schere":
+                if computerfigur == "Stein":
+                    print("Verloren")
+                else:
+                    print("Gewonnen")
 
-        if spielerfigur == "Stein":
-            if computerfigur == "Papier":
-                print("Verloren")
-            else:
-                print("Gewonnen")
+            if spielerfigur == "Stein":
+                if computerfigur == "Papier":
+                    print("Verloren")
+                else:
+                    print("Gewonnen")
 
-        if spielerfigur == "Papier":
-            if computerfigur == "Schere":
-                print("Verloren")
-            else:
-                print("Gewonnen")'''
+            if spielerfigur == "Papier":
+                if computerfigur == "Schere":
+                    print("Verloren")
+                else:
+                    print("Gewonnen")
 
     # Eventhandler
     for event in pygame.event.get():
