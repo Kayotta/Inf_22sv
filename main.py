@@ -20,7 +20,8 @@ figuren = [0, "Schere", "Stein", "Papier"]
 
 # Spielvariablen initialisieren
 game_state = "menu"
-spielerfigur = False
+spielerfigur = figuren[0]
+computerfigur = figuren[0]
 
 RUNNING = True
 # Game Loop
@@ -46,31 +47,34 @@ while RUNNING:
         if Buttons.exit_button.draw(display):
             sys.exit()
 
-
     # Computerfigur auswählen
         computerfigur = figuren[random.randint(1, 3)]
+        print(computerfigur)
 
-        # Sieger ermitteln
-        if spielerfigur == computerfigur:
-            print("Unentschieden")
-        else:
-            if spielerfigur == "Schere":
-                if computerfigur == "Stein":
-                    print("Verloren")
-                else:
-                    print("Gewonnen")
+    # Sieger ermitteln
+        if Buttons.rock_button.draw(display) or Buttons.paper_button.draw(display) or Buttons.scissor_button.draw(display):
 
-            if spielerfigur == "Stein":
-                if computerfigur == "Papier":
-                    print("Verloren")
-                else:
-                    print("Gewonnen")
+            if spielerfigur == computerfigur:
+                print("Unentschieden")
+            else:
+                if spielerfigur == "Schere":
+                    if computerfigur == "Stein":
+                        print("Verloren")
+                    else:
+                        print("Gewonnen")
 
-            if spielerfigur == "Papier":
-                if computerfigur == "Schere":
-                    print("Verloren")
-                else:
-                    print("Gewonnen")
+                if spielerfigur == "Stein":
+                    if computerfigur == "Papier":
+                        print("Verloren")
+                    else:
+                        print("Gewonnen")
+
+                if spielerfigur == "Papier":
+                    if computerfigur == "Schere":
+                        print("Verloren")
+                    else:
+                        print("Gewonnen")
+            break
 
     # Eventhandler
     for event in pygame.event.get():
