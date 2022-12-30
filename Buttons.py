@@ -10,6 +10,7 @@ display = pygame.display.set_mode((800, 600))
 # Startbutton laden
 start_img = pygame.image.load('bilder/Start.png').convert_alpha()
 exit_img = pygame.image.load('bilder/exit.png').convert_alpha()
+restart_img = pygame.image.load('bilder/restart.png').convert_alpha()
 rock_img = pygame.image.load('bilder/rock.png').convert_alpha()
 paper_img = pygame.image.load('bilder/paper.png').convert_alpha()
 scissor_img = pygame.image.load('bilder/scissor.png').convert_alpha()
@@ -51,6 +52,7 @@ class Buttons():
 # Fälle definieren
 start_button = Buttons(0, 0, start_img, 3)  #(305, 200, start_img, 3)
 exit_button = Buttons(500, 50, exit_img, 0.3)
+restart_button = Buttons(305, 200, restart_img, 0.3)
 rock_button = Buttons(90, 200, rock_img, 0.4)
 paper_button = Buttons(230, 150, paper_img, 0.6)
 scissor_button = Buttons(490, 180, scissor_img, 0.5)
