@@ -49,7 +49,7 @@ class Buttons():
 
 
 # Fälle definieren
-start_button = Buttons(305, 200, start_img, 3)
+start_button = Buttons(0, 0, start_img, 3)  #(305, 200, start_img, 3)
 exit_button = Buttons(500, 50, exit_img, 0.3)
 rock_button = Buttons(90, 200, rock_img, 0.4)
 paper_button = Buttons(230, 150, paper_img, 0.6)

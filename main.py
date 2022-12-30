@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random
+import random   # from random import randint
 import time
 import Buttons
 
@@ -22,6 +22,7 @@ figuren = [0, "Schere", "Stein", "Papier"]
 game_state = "menu"
 spielerfigur = figuren[0]
 computerfigur = figuren[0]
+zufallsgenerator = True
 
 RUNNING = True
 # Game Loop
@@ -40,19 +41,24 @@ while RUNNING:
     if game_state == "game":
         if Buttons.rock_button.draw(display):
             spielerfigur = figuren[2]
+            print("spieler = Stein")
         if Buttons.paper_button.draw(display):
             spielerfigur = figuren[3]
+            print("spieler = Papier")
         if Buttons.scissor_button.draw(display):
             spielerfigur = figuren[1]
+            print("spieler = Schere")
         if Buttons.exit_button.draw(display):
             sys.exit()
 
     # Computerfigur auswählen
-        computerfigur = figuren[random.randint(1, 3)]
-        print(computerfigur)
+        while zufallsgenerator == True:
+            computerfigur = figuren[random.randint(1, 3)]   # figuren[randint(1, 3)]
+            print("computer =", computerfigur)
+            zufallsgenerator = False
 
     # Sieger ermitteln
-        if Buttons.rock_button.draw(display) or Buttons.paper_button.draw(display) or Buttons.scissor_button.draw(display):
+        if spielerfigur == figuren[1] or spielerfigur == figuren[2] or spielerfigur == figuren[3]:
 
             if spielerfigur == computerfigur:
                 print("Unentschieden")
