@@ -26,7 +26,7 @@ computerfigur = figuren[0]
 RUNNING = True
 # Game Loop
 while RUNNING:
-    display.fill((100, 55, 255))
+    display.fill((100, 90, 255))
 
     # Startbildschirm und Startknopf kreieren
     if game_state == "menu":
