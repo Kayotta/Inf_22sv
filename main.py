@@ -16,7 +16,7 @@ display = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Rock-Paper-Scissors")
 icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
-pygame.display.update()
+
 
 # Textdarstellende Funktion definieren
 def draw_text(text, font, text_col, x, y):
@@ -37,16 +37,18 @@ computerfigur = figuren[0]
 zufallsgenerator = True
 comp_counter = 0
 play_counter = 0
-# Spielerpunkte = ["Du:", str(play_counter)]
-# Computerpunkte = ["Computer:", str(comp_counter)]
+
 
 RUNNING = True
 # Game Loop
 while RUNNING:
-    display.fill((100, 90, 255))
+    display.fill((29, 46, 209))
 
     # Startbildschirm und Startknopf kreieren
     if game_state == "menu":
+        # Startbildschirm kreieren
+        startbild = pygame.image.load("bilder/rockpaperscissors.png").convert_alpha()
+        display.blit(startbild, (200, 100))
         if Buttons.exit_button.draw(display):
             sys.exit()
         if Buttons.start_button.draw(display):
@@ -61,7 +63,7 @@ while RUNNING:
         if Buttons.paper_button.draw(display):
             spielerfigur = figuren[3]
             print("spieler = Papier")
-        if Buttons.scissor_button.draw(display):
+        if Buttons.scissors_button.draw(display):
             spielerfigur = figuren[1]
             print("spieler = Schere")
         if Buttons.exit_button.draw(display):
@@ -113,7 +115,7 @@ while RUNNING:
     if game_state == "restart":
         draw_text(play_counter, font, TEXT_COL, 1, 1)
 
-        if Buttons.restart_button.draw(display):
+        if Buttons.continue_button.draw(display):
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]

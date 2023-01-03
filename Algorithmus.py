@@ -9,7 +9,7 @@ spielen = True
 while spielen:
 
     # Spielerfigur
-    if Button.scissor_button.clicked == True:
+    if Button.scissors_button.clicked == True:
         spielerfigur = figuren[0]
     elif Button.rock_button.clicked == True:
         spielerfigur = figuren[1]
