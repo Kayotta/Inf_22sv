@@ -1,6 +1,6 @@
 import time
 import random
-import Button
+import Buttons
 import pygame
 
 figuren = ('Schere', 'Stein', 'Papier')
