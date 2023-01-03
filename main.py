@@ -17,7 +17,7 @@ pygame.display.update()
 
 # Textdarstellende Funktion definieren
 def draw_text(text, font, text_col, x, y):
-    img = font.render(text, True, text_col)
+    img = font.render(str(text), True, text_col)
     display.blit(img, (x, y))
 
 # Schrift, Schriftfarbe und Schriftgrösse definieren
@@ -34,6 +34,8 @@ computerfigur = figuren[0]
 zufallsgenerator = True
 comp_counter = 0
 play_counter = 0
+# Spielerpunkte = ["Du:", str(play_counter)]
+# Computerpunkte = ["Computer:", str(comp_counter)]
 
 RUNNING = True
 # Game Loop
@@ -102,11 +104,13 @@ while RUNNING:
             game_state = "restart"
 
     if game_state == "restart":
+        draw_text(play_counter, font, TEXT_COL, 1, 1)
+
         if Buttons.restart_button.draw(display):
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]
-            draw_text(play_counter, font, TEXT_COL, 1, 1)
+            computerfigur = figuren[0]
         if Buttons.exit_button.draw(display):
             sys.exit()
 
