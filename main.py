@@ -1,10 +1,12 @@
 import pygame
 import sys
 import random   # from random import randint
+from pygame import mixer
 import time
 import Buttons
 
 pygame.init()
+pygame.mixer.init()
 
 # Screen erstellen
 display = pygame.display.set_mode((800, 600))
@@ -13,6 +15,9 @@ display = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Rock-Paper-Scissors")
 icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
+
+# Musik und Soundeffekte
+
 
 
 # Textdarstellende Funktion definieren
@@ -106,10 +111,18 @@ while RUNNING:
             game_state = "restart"
 
     if game_state == "restart":
-        draw_text(play_counter, font, TEXT_COL, 1, 1)
+        draw_text("Your Score:", font, TEXT_COL, 1, 1)
+        draw_text(play_counter, font, TEXT_COL, 270, 1)
 
         if Buttons.continue_button.draw(display):
             game_state = "game"
+            zufallsgenerator = True
+            spielerfigur = figuren[0]
+            computerfigur = figuren[0]
+        if Buttons.reset_button.draw(display):
+            game_state = "menu"
+            play_counter = 0
+            comp_counter = 0
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
