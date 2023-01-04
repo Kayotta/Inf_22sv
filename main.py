@@ -3,6 +3,9 @@ import sys
 import random   # from random import randint
 from pygame import mixer
 import time
+
+from pygame.font import Font
+
 import Buttons
 
 pygame.init()
@@ -82,6 +85,10 @@ while RUNNING:
 
             if spielerfigur == computerfigur:
                 print("Unentschieden")
+                if spielerfigur == computerfigur:   # funktioniert nicht ganz
+                    def draw_text(text, font, text_col, x, y):
+                        img = font.render(str('Unentschieden'),True, text_col)
+                        display.blit(img, (200, 400))
             else:
                 if spielerfigur == "Schere":
                     if computerfigur == "Stein":
