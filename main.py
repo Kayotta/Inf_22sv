@@ -30,6 +30,7 @@ def draw_text(text, font, text_col, x, y):
 
 # Schrift, Schriftfarbe und Schriftgrösse definieren
 font = pygame.font.SysFont("arialblack", 40)
+font1 = pygame.font.SysFont("Impact", 40)
 TEXT_COL = (0, 0, 0)
 
 # Figuren initialisieren
@@ -42,6 +43,7 @@ computerfigur = figuren[0]
 zufallsgenerator = True
 comp_counter = 0
 play_counter = 0
+chosen = 0
 
 
 RUNNING = True
@@ -54,24 +56,27 @@ while RUNNING:
         # Startbildschirm kreieren
         startbild = pygame.image.load("bilder/rockpaperscissors.png").convert_alpha()
         display.blit(startbild, (200, 100))
-        if Buttons.exit_button.draw(display):
+        if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
-        if Buttons.start_button.draw(display):
+        if Buttons.start_button.draw(display):  # 0.5):
             # Spiel beginnt
             game_state = "game"
 
     # Spielerfigur auswählen
     if game_state == "game":
-        if Buttons.rock_button.draw(display):
+        if Buttons.rock_button.draw(display): # 0.4):
             spielerfigur = figuren[2]
+            chosen = pygame.image.load('bilder/rock.png').convert_alpha() # Buttons.rock_img
             print("spieler = Stein")
-        if Buttons.paper_button.draw(display):
+        if Buttons.paper_button.draw(display): # 0.6):
             spielerfigur = figuren[3]
+            chosen = Buttons.paper_img
             print("spieler = Papier")
-        if Buttons.scissors_button.draw(display):
+        if Buttons.scissors_button.draw(display): # 0.5):
             spielerfigur = figuren[1]
+            chosen = Buttons.scissors_img
             print("spieler = Schere")
-        if Buttons.exit_button.draw(display):
+        if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
 
     # Computerfigur auswählen
@@ -85,10 +90,12 @@ while RUNNING:
 
             if spielerfigur == computerfigur:
                 print("Unentschieden")
-                if spielerfigur == computerfigur:   # funktioniert nicht ganz
-                    def draw_text(text, font, text_col, x, y):
-                        img = font.render(str('Unentschieden'),True, text_col)
+
+                '''if spielerfigur == computerfigur:   # funktioniert nicht ganz
+                    def draw_text(text, font1, text_col, x, y):
+                        img = font.render(str('Unentschieden'),font1, TEXT_COL)
                         display.blit(img, (200, 400))
+                    print("Unentschieden")'''
             else:
                 if spielerfigur == "Schere":
                     if computerfigur == "Stein":
@@ -114,26 +121,35 @@ while RUNNING:
                         print("Gewonnen")
                         play_counter = play_counter + 1
 
+        game_state = "fighting"
 
-            game_state = "restart"
+    if game_state == "fighting":
+        pygame.transform.rotate(chosen, 90)
+
+
+        game_state = "restart"
 
     if game_state == "restart":
-        draw_text("Your Score:", font, TEXT_COL, 1, 1)
-        draw_text(play_counter, font, TEXT_COL, 270, 1)
+        draw_text("Your Score:", font1, TEXT_COL, 1, 1)
+        draw_text(play_counter, font1, TEXT_COL, 230, 1)
+        draw_text("Computer Score:", font1, TEXT_COL, 450, 1)
+        draw_text(comp_counter, font1, TEXT_COL, 750, 1)
 
-        if Buttons.continue_button.draw(display):
+        if Buttons.continue_button.draw(display): # 0.3):
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-        if Buttons.reset_button.draw(display):
+            chosen = 0
+        if Buttons.reset_button.draw(display): # 0.3):
             game_state = "menu"
             play_counter = 0
             comp_counter = 0
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-        if Buttons.exit_button.draw(display):
+            chosen = 0
+        if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
 
     # Eventhandler
