@@ -144,7 +144,12 @@ while RUNNING:
             game_state = "fighting"
 
     if game_state == "fighting":
-        display.blit(bild1, (-20, 100))
+        x = -40
+        y = 80
+        display.blit(bild1, (x, y))         # -20, 100
+        for i in range(20):
+            x = x + 1
+            y = y + 1
         display.blit(bild2, (400,100))
         if win == 1:
             display.blit(winning, (200, 100))
@@ -155,8 +160,8 @@ while RUNNING:
         if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
 
-        game_state = "restart"      # Achtung: für game_state = "restart" ist noch keine Bedingung gesetzt.
-                                    # Deshalb wird game_state = "fighting" nur für Milisekunden dargestellt
+        # game_state = "restart"      # Achtung: für game_state = "restart" ist noch keine Bedingung gesetzt.
+                                      # Deshalb wird game_state = "fighting" nur für Milisekunden dargestellt
     if game_state == "restart":
         draw_text("Your Score:", font1, TEXT_COL, 1, 1)
         draw_text(play_counter, font1, TEXT_COL, 230, 1)
@@ -177,7 +182,6 @@ while RUNNING:
             computerfigur = figuren[0]
         if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
-
     # Eventhandler
     for event in pygame.event.get():
         # Exit Game
