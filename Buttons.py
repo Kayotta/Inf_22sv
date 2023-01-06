@@ -34,14 +34,6 @@ class Buttons():
         self.rect.y = y
         self.clicked = False
 
-    '''def mouseover (self, scale):
-        width = self.get_width()
-        height = self.get_height()
-        size = (self.height * scale) * (self.width * scale)
-        pos = pygame.mouse.get_pos()
-        if self.rect.collidepoint(pos):
-            scale = scale + 0.2'''
-
 
     def draw(self, surface):
         action = False
