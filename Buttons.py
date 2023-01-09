@@ -15,6 +15,10 @@ reset_img = pygame.image.load('bilder/reset.png').convert_alpha()
 rock_img = pygame.image.load('bilder/rock.png').convert_alpha()
 paper_img = pygame.image.load('bilder/paper.png').convert_alpha()
 scissors_img = pygame.image.load('bilder/scissors.png').convert_alpha()
+menu_img = pygame.image.load('bilder/menu.png').convert_alpha()
+back_img = pygame.image.load('bilder/back.png').convert_alpha()
+mute_img = pygame.image.load('bilder/mute.png').convert_alpha()
+unmute_img = pygame.image.load('bilder/sound-on.png').convert_alpha()
 
 # Clicksound initialisieren
 clicked_sound = pygame.mixer.Sound("sound/mixkit-game-ball-tap-2073.wav")
@@ -66,6 +70,10 @@ reset_button = Buttons(20, 430, reset_img, 0.3)
 rock_button = Buttons(90, 200, rock_img, 0.4)
 paper_button = Buttons(230, 150, paper_img, 0.6)
 scissors_button = Buttons(490, 180, scissors_img, 0.5)
+menu_button = Buttons(750, 20, menu_img, 0.3)
+back_button = Buttons(10, 20, back_img, 0.3)
+mute_button = Buttons(350, 150, mute_img, 0.2)
+unmute_button = Buttons(550, 150, unmute_img, 0.2)
 
 # Game Loop zum Ausprobieren
 '''run = True

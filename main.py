@@ -43,7 +43,7 @@ play_bilder = [0, pygame.image.load("bilder/Fighting/rock1.png"), pygame.image.l
 comp_bilder = [0, pygame.image.load("bilder/Fighting/rock2.png"), pygame.image.load("bilder/Fighting/paper2.png"), pygame.image.load("bilder/Fighting/scissors2.png")]
 
 # Spielvariablen initialisieren
-game_state = "menu"
+game_state = "main_menu"
 spielerfigur = figuren[0]
 computerfigur = figuren[0]
 zufallsgenerator = True
@@ -68,15 +68,36 @@ RUNNING = True
 while RUNNING:
     display.fill((29, 46, 209))
 
-    if game_state == "menu":
+    if game_state == "main_menu":
         # Startbildschirm kreieren
         startbild = pygame.image.load("bilder/rockpaperscissors.png").convert_alpha()
         display.blit(startbild, (200, 100))
         if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
+        if Buttons.menu_button.draw(display):
+            game_state = "lower_menu"
+
         if Buttons.start_button.draw(display):  # 0.5):
             # Spiel beginnt
             game_state = "game"
+
+
+    if game_state == "lower_menu":
+        draw_text("Sound:", font1, TEXT_COL, 1, 180)
+        if Buttons.unmute_button.draw(display):
+            winning_sound.set_volume(0.5)
+            losing_sound.set_volume(1.0)
+            draw_sound.set_volume(0.5)
+            print("music")
+        if Buttons.mute_button.draw(display):
+            winning_sound.set_volume(0.0)
+            losing_sound.set_volume(0.0)
+            draw_sound.set_volume(0.0)
+            print("no music")
+        if Buttons.back_button.draw(display):
+            pygame.display.update()
+            pygame.time.wait(250)
+            game_state = "main_menu"
 
     # Spielerfigur auswählen
     if game_state == "game":
@@ -207,14 +228,14 @@ while RUNNING:
         draw_text(comp_counter, font1, TEXT_COL, 750, 1)
 
         if Buttons.continue_button.draw(display): # 0.3):
-            pygame.time.wait(220)
+            pygame.time.wait(250)
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
             # display.fill((29, 46, 209))
         if Buttons.reset_button.draw(display): # 0.3):
-            game_state = "menu"
+            game_state = "main_menu"
             play_counter = 0
             comp_counter = 0
             zufallsgenerator = True
