@@ -74,9 +74,9 @@ class Buttons():
 # Fälle definieren
 start_button = Buttons(953, 463, start_img, 0.6)
 exit_button = Buttons(20, -10, exit_img, 0.45)
-exit1_button = Buttons(953, 463, exit1_img, 0.45)
-continue_button = Buttons(305, 200, continue_img, 0.3)
-reset_button = Buttons(20, 430, reset_img, 0.3)
+exit1_button = Buttons(1003, 483, exit1_img, 0.45)
+continue_button = Buttons(563, 283, continue_img, 0.3)
+reset_button = Buttons(20, 546, reset_img, 0.3)
 rock_button = Buttons(200, 238, rock_img, 0.6)
 paper_button = Buttons(486, 200, paper_img, 0.6)
 scissors_button = Buttons(772, 200, scissors_img, 0.6)

@@ -203,9 +203,9 @@ while RUNNING:
         if win == 1:
             sound_play = True
             while sound_play ==True:
-                display.blit(bild1, (20, 350))
-                display.blit(bild2, (800, 350))
-                display.blit(winning, (384, 100))
+                display.blit(bild1, (20, 300))
+                display.blit(bild2, (700, 300))
+                display.blit(winning, (384, 50))
                 winning_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -216,9 +216,9 @@ while RUNNING:
         if win == 2:
             sound_play = True
             while sound_play == True:
-                display.blit(bild1, (-20, 100))
-                display.blit(bild2, (400, 100))
-                display.blit(losing, (384, 100))
+                display.blit(bild1, (20, 300))
+                display.blit(bild2, (700, 300))
+                display.blit(losing, (384, 50))
                 losing_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -229,9 +229,9 @@ while RUNNING:
         if win == 3:
             sound_play = True
             while sound_play == True:
-                display.blit(bild1, (-20, 100))
-                display.blit(bild2, (400, 100))
-                display.blit(draw, (384, 100))
+                display.blit(bild1, (20, 300))
+                display.blit(bild2, (700, 300))
+                display.blit(draw, (384, 50))
                 draw_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -241,10 +241,14 @@ while RUNNING:
 
 
     if game_state == "restart":
-        draw_text("Your Score:", font1, TEXT_COL, 1, 1)
+        '''draw_text("Your Score:", font1, TEXT_COL, 1, 1)
         draw_text(play_counter, font1, TEXT_COL, 230, 1)
         draw_text("Computer Score:", font1, TEXT_COL, 450, 1)
-        draw_text(comp_counter, font1, TEXT_COL, 750, 1)
+        draw_text(comp_counter, font1, TEXT_COL, 750, 1)'''
+        draw_text("Your Score:", font2, TEXT_COL, 20, 20)
+        draw_text(play_counter, font2, TEXT_COL, 290, 20)
+        draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
+        draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
 
         if Buttons.continue_button.draw(display): # 0.3):
             pygame.time.wait(250)
