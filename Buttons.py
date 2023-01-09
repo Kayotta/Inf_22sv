@@ -19,6 +19,10 @@ menu_img = pygame.image.load('bilder/menu.png').convert_alpha()
 back_img = pygame.image.load('bilder/back.png').convert_alpha()
 mute_img = pygame.image.load('bilder/mute.png').convert_alpha()
 unmute_img = pygame.image.load('bilder/sound-on.png').convert_alpha()
+# Colorbuttons
+blue_img = pygame.image.load('bilder/blue.png').convert_alpha()
+pink_img = pygame.image.load('bilder/pink.png').convert_alpha()
+yellow_img = pygame.image.load('bilder/yellow.png').convert_alpha()
 
 # Clicksound initialisieren
 clicked_sound = pygame.mixer.Sound("sound/mixkit-game-ball-tap-2073.wav")
@@ -63,7 +67,7 @@ class Buttons():
 
 
 # Fälle definieren
-start_button = Buttons(20, 0, start_img, 0.5)  # (305, 200, start_img, 3)
+start_button = Buttons(0, -40, start_img, 0.5)  # (305, 200, start_img, 3)
 exit_button = Buttons(600, 450, exit_img, 0.3)
 continue_button = Buttons(305, 200, continue_img, 0.3)
 reset_button = Buttons(20, 430, reset_img, 0.3)
@@ -72,8 +76,12 @@ paper_button = Buttons(230, 150, paper_img, 0.6)
 scissors_button = Buttons(490, 180, scissors_img, 0.5)
 menu_button = Buttons(750, 20, menu_img, 0.3)
 back_button = Buttons(10, 20, back_img, 0.3)
-mute_button = Buttons(350, 150, mute_img, 0.2)
-unmute_button = Buttons(550, 150, unmute_img, 0.2)
+mute_button = Buttons(250, 150, mute_img, 0.2)
+unmute_button = Buttons(450, 150, unmute_img, 0.2)
+# Colorbuttons
+blue_button = Buttons(250, 280, blue_img, 0.2)
+pink_button = Buttons(450, 280, pink_img, 0.2)
+yellow_button = Buttons(650, 275, yellow_img, 0.22)
 
 # Game Loop zum Ausprobieren
 '''run = True

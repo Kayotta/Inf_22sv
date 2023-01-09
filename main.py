@@ -66,7 +66,7 @@ draw = pygame.image.load("bilder/draw.png")
 # Game loop
 RUNNING = True
 while RUNNING:
-    display.fill((29, 46, 209))
+    display.fill((49, 29, 209))
 
     if game_state == "main_menu":
         # Startbildschirm kreieren
@@ -84,6 +84,16 @@ while RUNNING:
 
     if game_state == "lower_menu":
         draw_text("Sound:", font1, TEXT_COL, 1, 180)
+        draw_text("Background:", font1, TEXT_COL, 1, 300)
+        if Buttons.blue_button.draw(display):
+            print("blue")
+            display.fill((49, 26, 209))
+        if Buttons.pink_button.draw(display):
+            print("pink")
+            display.fill((253, 172, 226))
+        if Buttons.yellow_button.draw(display):
+            print("yellow")
+            display.fill((249, 211, 35))
         if Buttons.unmute_button.draw(display):
             winning_sound.set_volume(0.5)
             losing_sound.set_volume(1.0)
