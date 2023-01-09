@@ -148,7 +148,7 @@ while RUNNING:
             bild2 = comp_bilder[1]
         elif computerfigur == figuren[2]:
             bild2 = comp_bilder[2]
-        else:       # computerfigur == figuren[3]:
+        else:
             bild2 = comp_bilder[3]
 
 
@@ -186,7 +186,7 @@ while RUNNING:
                         win = 1
                         play_counter = play_counter + 1
 
-                else:       # spielerfigur == "Papier":
+                else:
                     if computerfigur == "Schere":
                         print("Verloren")
                         win = 2
@@ -195,7 +195,7 @@ while RUNNING:
                         print("Gewonnen")
                         win = 1
                         play_counter = play_counter + 1
-            display.fill((49, 26, 209))
+
             game_state = "fighting"
 
     if game_state == "fighting":
@@ -241,10 +241,6 @@ while RUNNING:
 
 
     if game_state == "restart":
-        '''draw_text("Your Score:", font1, TEXT_COL, 1, 1)
-        draw_text(play_counter, font1, TEXT_COL, 230, 1)
-        draw_text("Computer Score:", font1, TEXT_COL, 450, 1)
-        draw_text(comp_counter, font1, TEXT_COL, 750, 1)'''
         draw_text("Your Score:", font2, TEXT_COL, 20, 20)
         draw_text(play_counter, font2, TEXT_COL, 290, 20)
         draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
