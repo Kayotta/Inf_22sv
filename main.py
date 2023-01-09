@@ -1,6 +1,6 @@
 import pygame
 import sys
-import random   # from random import randint
+import random
 from pygame import mixer
 import time
 
@@ -8,6 +8,7 @@ from pygame.font import Font
 
 import Buttons
 
+# Initialisiere Pygame und den Mixer
 pygame.init()
 pygame.mixer.init()
 
@@ -15,8 +16,7 @@ pygame.mixer.init()
 display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 # Display = 1280 * 720
 
-
-# Titel und Icon
+# Windowcaption und Icon
 pygame.display.set_caption("Rock-Paper-Scissors")
 icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
@@ -44,20 +44,27 @@ TEXT_COL = (0, 0, 0)
 figuren = [0, "Stein", "Papier", "Schere"]
 play_bilder = [0, pygame.image.load("bilder/Fighting/rock1.png"), pygame.image.load("bilder/Fighting/paper1.png"), pygame.image.load("bilder/Fighting/scissors1.png")]
 comp_bilder = [0, pygame.image.load("bilder/Fighting/rock2.png"), pygame.image.load("bilder/Fighting/paper2.png"), pygame.image.load("bilder/Fighting/scissors2.png")]
+# play- und comp_bilder sind die Listen, die die bilder für den Game-Status "fighting" beinhalten
+# so wird dargestellt, wer welche Figur gewählt hat.
 
 # Spielvariablen initialisieren
 game_state = "main_menu"
+hintergrundfarbe = "blue"
 spielerfigur = figuren[0]
 computerfigur = figuren[0]
 zufallsgenerator = True
-sound_play1 = False
+'''sound_play1 = False
 sound_play2 = False
-sound_play3 = False
+sound_play3 = False'''
 comp_counter = 0
 play_counter = 0
 win = 0         # win = 1 bedeutet Spieler hat gewonnen, win = 2 bedeutet Computer hat gewonnen
+                # win = 3 bedeutet unentschieden
 
 # Sonstige Bilder laden
+# Bild für den Startbildschirm
+startbild = pygame.image.load("bilder/rockpaperscissors.png")
+# Bilder für den Game-Status "fighting", bzw. Darstellung des Spielausgangs
 winning = pygame.image.load("bilder/win.png")
 winning_groesse = winning.get_rect()
 winning = pygame.transform.scale(winning, (512, 512))
@@ -71,93 +78,115 @@ RUNNING = True
 while RUNNING:
     display.fill((49, 29, 209))
 
+    # Game-Status "main_menu"
     if game_state == "main_menu":
-        # Startbildschirm kreieren
-        startbild = pygame.image.load("bilder/rockpaperscissors.png").convert_alpha()
+        # Abfrage der Hintergrundfarbe, da diese im Menu verändert werden kann
+        if hintergrundfarbe == "pink":
+            display.fill((253, 172, 226))
+        if hintergrundfarbe == "yellow":
+             display.fill((249, 211, 35))
+        if hintergrundfarbe == "blue":
+            display.fill((49, 26, 209))
+
+        # Abbilden des Bildes auf dem Startbildschirm
         display.blit(startbild, (384, 104))
-        if Buttons.exit_button.draw(display): # 0.3):
-            sys.exit()
+        # Abbilden von Start-, Exit- und Menubutton und Abfrage nach deren Status (angeklickt oder nicht)
+        # Code dieses Mechanismus' in Buttons zu finden
         if Buttons.menu_button.draw(display):
             game_state = "lower_menu"
-
-        if Buttons.start_button.draw(display):  # 0.5):
-            # Spiel beginnt
+        if Buttons.start_button.draw(display):
             game_state = "game"
+        if Buttons.exit_button.draw(display):
+            sys.exit()
 
-
-
+    # Menu wird geöffnet
     if game_state == "lower_menu":
+        # Abfrage der Hintergrundfarbe, die hier verändert werden kann
+        if game_state == "main_menu":
+            if hintergrundfarbe == "pink":
+                display.fill((253, 172, 226))
+            if hintergrundfarbe == "yellow":
+                 display.fill((249, 211, 35))
+            if hintergrundfarbe == "blue":
+                display.fill((49, 26, 209))
+
+        # Text zur Beschriftung der Buttons
         draw_text("Sound:", font1, TEXT_COL, 20, 200)
         draw_text("Background:", font1, TEXT_COL, 20, 340)
         draw_text("Music:", font1, TEXT_COL, 20, 480)
+        # Abbilden der Musicbuttons und Abfragen deren Staten
         if Buttons.music1_button.draw(display):
             print("eins")
         if Buttons.music2_button.draw(display):
             print("zwei")
         if Buttons.music3_button.draw(display):
             print("drei")
+        # Abbilden der Colorbuttons
         if Buttons.blue_button.draw(display):
-            print("blue")
-            display.fill((49, 26, 209))
+            hintergrundfarbe = "blue"
         if Buttons.pink_button.draw(display):
-            print("pink")
-            display.fill((253, 172, 226))
+            hintergrundfarbe = "pink"
         if Buttons.yellow_button.draw(display):
-            print("yellow")
-            display.fill((249, 211, 35))
+            hintergrundfarbe = "yellow"
+        # Abbilden der Mute- und Unmutebuttons
         if Buttons.unmute_button.draw(display):
             winning_sound.set_volume(0.5)
             losing_sound.set_volume(1.0)
             draw_sound.set_volume(0.5)
-            print("music")
+            Buttons.clicked_sound.set_volume(1.0)
         if Buttons.mute_button.draw(display):
             winning_sound.set_volume(0.0)
             losing_sound.set_volume(0.0)
             draw_sound.set_volume(0.0)
-            print("no music")
-        if Buttons.back_button.draw(display):
-            pygame.display.update()
-            pygame.time.wait(250)
-            game_state = "main_menu"
+            Buttons.clicked_sound.set_volume(0.0)
+        # Abbilden des Returnbuttons
+        if Buttons.back_button.draw(display):   # Wait-Funktion, damit nicht ausversehen der Exitbutton gedrückt
+            pygame.display.update()             # wird, er befindet sich an denselben Koordinaten wie der Returnbutton
+            pygame.time.wait(250)               # durch eine Verzögerung wird der Game-Status noch nicht geändert und der
+            game_state = "main_menu"            # Knopf nicht abgebildet, so kann er nicht gedrückt werden.
 
-    # Spielerfigur auswählen
+    # Das Spiel beginnt
     if game_state == "game":
+
+        # Hintergrundfarbe wird abgefragt
+        if hintergrundfarbe == "pink":
+            display.fill((253, 172, 226))
+        if hintergrundfarbe == "yellow":
+             display.fill((249, 211, 35))
+        if hintergrundfarbe == "blue":
+            display.fill((49, 26, 209))
+        # Score wird dargestellt
         draw_text("Your Score:", font2, TEXT_COL, 20, 20)
         draw_text(play_counter, font2, TEXT_COL, 290, 20)
         draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
         draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
-        if Buttons.rock_button.draw(display): # 0.4):
+        # Spielfiguren abgebildet und Status abgefragt
+        if Buttons.rock_button.draw(display):
             spielerfigur = figuren[1]
             bild1 = play_bilder[1]
-            print("spieler = Stein")
-        if Buttons.paper_button.draw(display): # 0.6):
+        if Buttons.paper_button.draw(display):
             spielerfigur = figuren[2]
             bild1 = play_bilder[2]
-            print("spieler = Papier")
-        if Buttons.scissors_button.draw(display): # 0.5):
+        if Buttons.scissors_button.draw(display):
             spielerfigur = figuren[3]
             bild1 = play_bilder[3]
-            print("spieler = Schere")
 
-    # Computerfigur auswählen
+        # Computerfigur auswählen
         while zufallsgenerator == True:
-            computerfigur = figuren[random.randint(1, 3)]   # figuren[randint(1, 3)]
-            print("computer =", computerfigur)
-            zufallsgenerator = False
+            computerfigur = figuren[random.randint(1, 3)]
+            zufallsgenerator = False        # While-Schleife damit nur eine Figur gewählt wird
         if computerfigur == figuren[1]:
-            bild2 = comp_bilder[1]
+            bild2 = comp_bilder[1]          # Zuweisen der Figur zu einem Bild der Liste
         elif computerfigur == figuren[2]:
             bild2 = comp_bilder[2]
         else:
             bild2 = comp_bilder[3]
 
 
-
-    # Sieger ermitteln
+        # Bestimmung des Siegers
         if spielerfigur == figuren[1] or spielerfigur == figuren[2] or spielerfigur == figuren[3]:
 
             if spielerfigur == computerfigur:
-                print("Unentschieden")
                 win = 3
 
                 '''if spielerfigur == computerfigur:   # funktioniert nicht ganz
@@ -168,38 +197,39 @@ while RUNNING:
             else:
                 if spielerfigur == "Schere":
                     if computerfigur == "Stein":
-                        print("Verloren")
                         win = 2
                         comp_counter = comp_counter + 1
                     else:
-                        print("Gewonnen")
                         win = 1
                         play_counter = play_counter + 1
 
                 elif spielerfigur == "Stein":
                     if computerfigur == "Papier":
-                        print("Verloren")
                         win = 2
                         comp_counter = comp_counter + 1
                     else:
-                        print("Gewonnen")
                         win = 1
                         play_counter = play_counter + 1
 
                 else:
                     if computerfigur == "Schere":
-                        print("Verloren")
                         win = 2
                         comp_counter = comp_counter + 1
                     else:
-                        print("Gewonnen")
                         win = 1
                         play_counter = play_counter + 1
 
             game_state = "fighting"
 
     if game_state == "fighting":
-
+        # Hintergrundfarbe
+        if hintergrundfarbe == "pink":
+            display.fill((253, 172, 226))
+        if hintergrundfarbe == "yellow":
+             display.fill((249, 211, 35))
+        if hintergrundfarbe == "blue":
+            display.fill((49, 26, 209))
+        # Spieler hat gewonnen
         if win == 1:
             sound_play = True
             while sound_play ==True:
@@ -208,11 +238,10 @@ while RUNNING:
                 display.blit(winning, (384, 50))
                 winning_sound.play()
                 pygame.display.update()
-                pygame.time.wait(2800)
-                sound_play = False
-                display.fill((49, 26, 209))
+                pygame.time.wait(2800)      # Bildschirm wird durch die Verzögerung 2.8 Sekunden lang
+                sound_play = False          # dargestellt, sonst wären es bloss Millisekunden
                 game_state = "restart"
-
+        # Spieler hat verloren
         if win == 2:
             sound_play = True
             while sound_play == True:
@@ -223,9 +252,8 @@ while RUNNING:
                 pygame.display.update()
                 pygame.time.wait(2800)
                 sound_play = False
-                display.fill((49, 26, 209))
                 game_state = "restart"
-
+        # Unentschieden
         if win == 3:
             sound_play = True
             while sound_play == True:
@@ -236,32 +264,36 @@ while RUNNING:
                 pygame.display.update()
                 pygame.time.wait(2800)
                 sound_play = False
-                display.fill((49, 26, 209))
                 game_state = "restart"
 
-
     if game_state == "restart":
+        # Hintergrundfarbe
+        if hintergrundfarbe == "pink":
+            display.fill((253, 172, 226))
+        if hintergrundfarbe == "yellow":
+             display.fill((249, 211, 35))
+        if hintergrundfarbe == "blue":
+            display.fill((49, 26, 209))
+        # Darstellung von Spielstand
         draw_text("Your Score:", font2, TEXT_COL, 20, 20)
         draw_text(play_counter, font2, TEXT_COL, 290, 20)
         draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
         draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
-
-        if Buttons.continue_button.draw(display): # 0.3):
+        # Abbilden und Abfragen der Buttons, Variablen werden in den Startzustand versetzt
+        if Buttons.continue_button.draw(display):
             pygame.time.wait(250)
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-            # display.fill((29, 46, 209))
-        if Buttons.reset_button.draw(display): # 0.3):
+        if Buttons.reset_button.draw(display):
             game_state = "main_menu"
             play_counter = 0
             comp_counter = 0
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-            # display.fill((29, 46, 209))
-        if Buttons.exit1_button.draw(display): # 0.3):
+        if Buttons.exit1_button.draw(display):
             sys.exit()
 
     # Eventhandler

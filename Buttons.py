@@ -8,14 +8,17 @@ pygame.init()
 display = pygame.display.set_mode((800, 600))
 
 # Bilder laden
+# Gamesteuerungsbilder
 start_img = pygame.image.load('bilder/start.png').convert_alpha()
 exit_img = pygame.image.load('bilder/exit.png').convert_alpha()
 exit1_img = pygame.image.load('bilder/exit1.png').convert_alpha()
 continue_img = pygame.image.load('bilder/continue.png').convert_alpha()
 reset_img = pygame.image.load('bilder/reset.png').convert_alpha()
+# Figurenbilder
 rock_img = pygame.image.load('bilder/rock.png').convert_alpha()
 paper_img = pygame.image.load('bilder/paper.png').convert_alpha()
 scissors_img = pygame.image.load('bilder/scissors.png').convert_alpha()
+# Menubilder
 menu_img = pygame.image.load('bilder/menu.png').convert_alpha()
 back_img = pygame.image.load('bilder/back.png').convert_alpha()
 mute_img = pygame.image.load('bilder/mute.png').convert_alpha()
@@ -71,15 +74,18 @@ class Buttons():
 
 
 
-# Fälle definieren
+# Fälle definieren/ Parameter hinzufügen
+# Gamesteuerung
 start_button = Buttons(953, 463, start_img, 0.6)
 exit_button = Buttons(20, -10, exit_img, 0.45)
 exit1_button = Buttons(1003, 483, exit1_img, 0.45)
 continue_button = Buttons(563, 283, continue_img, 0.3)
 reset_button = Buttons(20, 546, reset_img, 0.3)
+# Figuren
 rock_button = Buttons(200, 238, rock_img, 0.6)
 paper_button = Buttons(486, 200, paper_img, 0.6)
 scissors_button = Buttons(772, 200, scissors_img, 0.6)
+# Menu
 menu_button = Buttons(1106, 20, menu_img, 0.3)
 back_button = Buttons(10, 20, back_img, 0.3)
 mute_button = Buttons(250, 170, mute_img, 0.2)
