@@ -47,12 +47,12 @@ while True:
      # Stein
     '''if spielerfigur == "Stein":
         pygame.image.load("stein.png")
-    spielerfigur = pygame.image.load("stein.png")
-    bildgroesse = spielerfigur.get_rect()
-    print(bildgroesse)
-    print(bildgroesse.center[0])
-    print(bildgroesse.center[1])
-    print(bildgroesse.width)
-    print(bildgroesse.height)
-    display.blit(spielerfigur, (200, 205))
-    pygame.display.update()'''
+        spielerfigur = pygame.image.load("stein.png")
+        bildgroesse = spielerfigur.get_rect()
+        print(bildgroesse)
+        print(bildgroesse.center[0])
+        print(bildgroesse.center[1])
+        print(bildgroesse.width)
+        print(bildgroesse.height)
+        display.blit(spielerfigur, (200, 205))
+        pygame.display.update()'''

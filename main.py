@@ -21,10 +21,11 @@ pygame.display.set_icon(icon)
 
 # Musik und Soundeffekte
 winning_sound = pygame.mixer.Sound("sound/mixkit-fantasy-game-success-notification-270.wav")
-winning_sound.set_volume(1.0)
+winning_sound.set_volume(0.5)
 losing_sound = pygame.mixer.Sound("sound/mixkit-player-losing-or-failing-2042.wav")
 losing_sound.set_volume(1.0)
-
+draw_sound = pygame.mixer.Sound("sound/mixkit-bell-notification-933.wav")
+draw_sound.set_volume(0.5)
 
 # Textdarstellende Funktion definieren
 def draw_text(text, font, text_col, x, y):
@@ -46,17 +47,24 @@ game_state = "menu"
 spielerfigur = figuren[0]
 computerfigur = figuren[0]
 zufallsgenerator = True
+sound_play1 = False
+sound_play2 = False
+sound_play3 = False
 comp_counter = 0
 play_counter = 0
 win = 0         # win = 1 bedeutet Spieler hat gewonnen, win = 2 bedeutet Computer hat gewonnen
 
 # Sonstige Bilder laden
 winning = pygame.image.load("bilder/win.png")
+winning_groesse = winning.get_rect()
+winning = pygame.transform.scale(winning, (512, 512))
+print(winning_groesse)              # drei Schritte, um die Bilder neu zu skalieren
 losing = pygame.image.load("bilder/lose.png")
 draw = pygame.image.load("bilder/draw.png")
 
+
+# Game loop
 RUNNING = True
-# Game Loop
 while RUNNING:
     display.fill((29, 46, 209))
 
@@ -72,6 +80,10 @@ while RUNNING:
 
     # Spielerfigur auswählen
     if game_state == "game":
+        draw_text("Your Score:", font1, TEXT_COL, 1, 1)
+        draw_text(play_counter, font1, TEXT_COL, 230, 1)
+        draw_text("Computer Score:", font1, TEXT_COL, 450, 1)
+        draw_text(comp_counter, font1, TEXT_COL, 750, 1)
         if Buttons.rock_button.draw(display): # 0.4):
             spielerfigur = figuren[1]
             bild1 = play_bilder[1]
@@ -143,27 +155,51 @@ while RUNNING:
                         print("Gewonnen")
                         win = 1
                         play_counter = play_counter + 1
-
+            display.fill((49, 26, 209))
             game_state = "fighting"
 
     if game_state == "fighting":
-        display.blit(bild1, (-20, 100))     # -20, 100
-
-        display.blit(bild2, (400,100))
 
         if win == 1:
-            display.blit(winning, (200, 100))
-            winning_sound.play()
-        if win == 2:
-            display.blit(losing, (200, 100))
-            losing_sound.play()
-        if win == 3:
-            display.blit(draw, (200, 100))
-        if Buttons.exit_button.draw(display): # 0.3):
-            sys.exit()
+            sound_play = True
+            while sound_play ==True:
+                display.blit(bild1, (-20, 100))
+                display.blit(bild2, (400, 100))
+                display.blit(winning, (200, 100))
+                winning_sound.play()
+                pygame.display.update()
+                pygame.time.wait(2800)
+                sound_play = False
+                display.fill((49, 26, 209))
+                game_state = "restart"
 
-        game_state = "restart"      # Achtung: für game_state = "restart" ist noch keine Bedingung gesetzt.
-                                      # Deshalb wird game_state = "fighting" nur für Milisekunden dargestellt
+        if win == 2:
+            sound_play = True
+            while sound_play == True:
+                display.blit(bild1, (-20, 100))
+                display.blit(bild2, (400, 100))
+                display.blit(losing, (200, 100))
+                losing_sound.play()
+                pygame.display.update()
+                pygame.time.wait(2800)
+                sound_play = False
+                display.fill((49, 26, 209))
+                game_state = "restart"
+
+        if win == 3:
+            sound_play = True
+            while sound_play == True:
+                display.blit(bild1, (-20, 100))
+                display.blit(bild2, (400, 100))
+                display.blit(draw, (200, 100))
+                draw_sound.play()
+                pygame.display.update()
+                pygame.time.wait(2800)
+                sound_play = False
+                display.fill((49, 26, 209))
+                game_state = "restart"
+
+
     if game_state == "restart":
         draw_text("Your Score:", font1, TEXT_COL, 1, 1)
         draw_text(play_counter, font1, TEXT_COL, 230, 1)
@@ -171,11 +207,12 @@ while RUNNING:
         draw_text(comp_counter, font1, TEXT_COL, 750, 1)
 
         if Buttons.continue_button.draw(display): # 0.3):
+            pygame.time.wait(220)
             game_state = "game"
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-            display.fill((29, 46, 209))
+            # display.fill((29, 46, 209))
         if Buttons.reset_button.draw(display): # 0.3):
             game_state = "menu"
             play_counter = 0
@@ -183,7 +220,7 @@ while RUNNING:
             zufallsgenerator = True
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
-            display.fill((29, 46, 209))
+            # display.fill((29, 46, 209))
         if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
 
