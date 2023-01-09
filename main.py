@@ -12,7 +12,9 @@ pygame.init()
 pygame.mixer.init()
 
 # Screen erstellen
-display = pygame.display.set_mode((900, 600))
+display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+# Display = 1280 * 720
+
 
 # Titel und Icon
 pygame.display.set_caption("Rock-Paper-Scissors")
@@ -35,6 +37,7 @@ def draw_text(text, font, text_col, x, y):
 # Schrift, Schriftfarbe und Schriftgrösse definieren
 font = pygame.font.SysFont("arialblack", 40)
 font1 = pygame.font.SysFont("Impact", 40)
+font2 = pygame.font.SysFont("Impact", 50)
 TEXT_COL = (0, 0, 0)
 
 # Figuren initialisieren
@@ -71,7 +74,7 @@ while RUNNING:
     if game_state == "main_menu":
         # Startbildschirm kreieren
         startbild = pygame.image.load("bilder/rockpaperscissors.png").convert_alpha()
-        display.blit(startbild, (200, 100))
+        display.blit(startbild, (384, 104))
         if Buttons.exit_button.draw(display): # 0.3):
             sys.exit()
         if Buttons.menu_button.draw(display):
@@ -82,9 +85,17 @@ while RUNNING:
             game_state = "game"
 
 
+
     if game_state == "lower_menu":
-        draw_text("Sound:", font1, TEXT_COL, 1, 180)
-        draw_text("Background:", font1, TEXT_COL, 1, 300)
+        draw_text("Sound:", font1, TEXT_COL, 20, 200)
+        draw_text("Background:", font1, TEXT_COL, 20, 340)
+        draw_text("Music:", font1, TEXT_COL, 20, 480)
+        if Buttons.music1_button.draw(display):
+            print("eins")
+        if Buttons.music2_button.draw(display):
+            print("zwei")
+        if Buttons.music3_button.draw(display):
+            print("drei")
         if Buttons.blue_button.draw(display):
             print("blue")
             display.fill((49, 26, 209))
@@ -111,10 +122,10 @@ while RUNNING:
 
     # Spielerfigur auswählen
     if game_state == "game":
-        draw_text("Your Score:", font1, TEXT_COL, 1, 1)
-        draw_text(play_counter, font1, TEXT_COL, 230, 1)
-        draw_text("Computer Score:", font1, TEXT_COL, 450, 1)
-        draw_text(comp_counter, font1, TEXT_COL, 750, 1)
+        draw_text("Your Score:", font2, TEXT_COL, 20, 20)
+        draw_text(play_counter, font2, TEXT_COL, 290, 20)
+        draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
+        draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
         if Buttons.rock_button.draw(display): # 0.4):
             spielerfigur = figuren[1]
             bild1 = play_bilder[1]
@@ -127,8 +138,6 @@ while RUNNING:
             spielerfigur = figuren[3]
             bild1 = play_bilder[3]
             print("spieler = Schere")
-        if Buttons.exit_button.draw(display): # 0.3):
-            sys.exit()
 
     # Computerfigur auswählen
         while zufallsgenerator == True:
@@ -194,9 +203,9 @@ while RUNNING:
         if win == 1:
             sound_play = True
             while sound_play ==True:
-                display.blit(bild1, (-20, 100))
-                display.blit(bild2, (400, 100))
-                display.blit(winning, (200, 100))
+                display.blit(bild1, (20, 350))
+                display.blit(bild2, (800, 350))
+                display.blit(winning, (384, 100))
                 winning_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -209,7 +218,7 @@ while RUNNING:
             while sound_play == True:
                 display.blit(bild1, (-20, 100))
                 display.blit(bild2, (400, 100))
-                display.blit(losing, (200, 100))
+                display.blit(losing, (384, 100))
                 losing_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -222,7 +231,7 @@ while RUNNING:
             while sound_play == True:
                 display.blit(bild1, (-20, 100))
                 display.blit(bild2, (400, 100))
-                display.blit(draw, (200, 100))
+                display.blit(draw, (384, 100))
                 draw_sound.play()
                 pygame.display.update()
                 pygame.time.wait(2800)
@@ -252,7 +261,7 @@ while RUNNING:
             spielerfigur = figuren[0]
             computerfigur = figuren[0]
             # display.fill((29, 46, 209))
-        if Buttons.exit_button.draw(display): # 0.3):
+        if Buttons.exit1_button.draw(display): # 0.3):
             sys.exit()
 
     # Eventhandler

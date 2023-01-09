@@ -10,6 +10,7 @@ display = pygame.display.set_mode((800, 600))
 # Bilder laden
 start_img = pygame.image.load('bilder/start.png').convert_alpha()
 exit_img = pygame.image.load('bilder/exit.png').convert_alpha()
+exit1_img = pygame.image.load('bilder/exit1.png').convert_alpha()
 continue_img = pygame.image.load('bilder/continue.png').convert_alpha()
 reset_img = pygame.image.load('bilder/reset.png').convert_alpha()
 rock_img = pygame.image.load('bilder/rock.png').convert_alpha()
@@ -23,6 +24,10 @@ unmute_img = pygame.image.load('bilder/sound-on.png').convert_alpha()
 blue_img = pygame.image.load('bilder/blue.png').convert_alpha()
 pink_img = pygame.image.load('bilder/pink.png').convert_alpha()
 yellow_img = pygame.image.load('bilder/yellow.png').convert_alpha()
+# Musicbuttons
+music1_img = pygame.image.load('bilder/live.png').convert_alpha()
+music2_img = pygame.image.load('bilder/music.png').convert_alpha()
+music3_img = pygame.image.load('bilder/note.png').convert_alpha()
 
 # Clicksound initialisieren
 clicked_sound = pygame.mixer.Sound("sound/mixkit-game-ball-tap-2073.wav")
@@ -67,21 +72,26 @@ class Buttons():
 
 
 # Fälle definieren
-start_button = Buttons(0, -40, start_img, 0.5)  # (305, 200, start_img, 3)
-exit_button = Buttons(600, 450, exit_img, 0.3)
+start_button = Buttons(953, 463, start_img, 0.6)
+exit_button = Buttons(20, -10, exit_img, 0.45)
+exit1_button = Buttons(953, 463, exit1_img, 0.45)
 continue_button = Buttons(305, 200, continue_img, 0.3)
 reset_button = Buttons(20, 430, reset_img, 0.3)
-rock_button = Buttons(90, 200, rock_img, 0.4)
-paper_button = Buttons(230, 150, paper_img, 0.6)
-scissors_button = Buttons(490, 180, scissors_img, 0.5)
-menu_button = Buttons(750, 20, menu_img, 0.3)
+rock_button = Buttons(200, 238, rock_img, 0.6)
+paper_button = Buttons(486, 200, paper_img, 0.6)
+scissors_button = Buttons(772, 200, scissors_img, 0.6)
+menu_button = Buttons(1106, 20, menu_img, 0.3)
 back_button = Buttons(10, 20, back_img, 0.3)
-mute_button = Buttons(250, 150, mute_img, 0.2)
-unmute_button = Buttons(450, 150, unmute_img, 0.2)
+mute_button = Buttons(250, 170, mute_img, 0.2)
+unmute_button = Buttons(450, 170, unmute_img, 0.2)
 # Colorbuttons
-blue_button = Buttons(250, 280, blue_img, 0.2)
-pink_button = Buttons(450, 280, pink_img, 0.2)
-yellow_button = Buttons(650, 275, yellow_img, 0.22)
+blue_button = Buttons(250, 320, blue_img, 0.2)
+pink_button = Buttons(450, 320, pink_img, 0.2)
+yellow_button = Buttons(650, 315, yellow_img, 0.22)
+# Musicbuttons
+music1_button = Buttons(250, 460, music1_img, 0.2)
+music2_button = Buttons(450, 460, music2_img, 0.2)
+music3_button = Buttons(650, 460, music3_img, 0.2)
 
 # Game Loop zum Ausprobieren
 '''run = True
