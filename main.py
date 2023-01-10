@@ -21,13 +21,16 @@ pygame.display.set_caption("Rock-Paper-Scissors")
 icon = pygame.image.load('bilder/rock-paper-scissors.png')
 pygame.display.set_icon(icon)
 
-# Musik und Soundeffekte
+# Soundeffekte
 winning_sound = pygame.mixer.Sound("sound/mixkit-fantasy-game-success-notification-270.wav")
 winning_sound.set_volume(0.5)
 losing_sound = pygame.mixer.Sound("sound/mixkit-player-losing-or-failing-2042.wav")
 losing_sound.set_volume(1.0)
 draw_sound = pygame.mixer.Sound("sound/mixkit-bell-notification-933.wav")
 draw_sound.set_volume(0.5)
+
+# Musik
+music1 = pygame.mixer.load("sound/")
 
 # Textdarstellende Funktion definieren
 def draw_text(text, font, text_col, x, y):
