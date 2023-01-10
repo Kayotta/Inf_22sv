@@ -49,7 +49,7 @@ class Buttons():
         self.rect.y = y
         self.clicked = False
 
-
+    # Abbildungsfunktion definieren
     def draw(self, surface):
         action = False
 
@@ -70,8 +70,6 @@ class Buttons():
         # Button auf Screen zeichnen
         display.blit(self.image, (self.rect.x, self.rect.y))
         return action
-
-
 
 
 # Fälle definieren/ Parameter hinzufügen

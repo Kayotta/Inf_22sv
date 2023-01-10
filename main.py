@@ -1,11 +1,7 @@
 import pygame
 import sys
 import random
-from pygame import mixer
-import time
-
-from pygame.font import Font
-
+import pygame.mixer
 import Buttons
 
 # Initialisiere Pygame und den Mixer
@@ -29,9 +25,6 @@ losing_sound.set_volume(1.0)
 draw_sound = pygame.mixer.Sound("sound/mixkit-bell-notification-933.wav")
 draw_sound.set_volume(0.5)
 
-# Musik
-music1 = pygame.mixer.load("sound/")
-
 # Textdarstellende Funktion definieren
 def draw_text(text, font, text_col, x, y):
     img = font.render(str(text), True, text_col)
@@ -47,7 +40,7 @@ TEXT_COL = (0, 0, 0)
 figuren = [0, "Stein", "Papier", "Schere"]
 play_bilder = [0, pygame.image.load("bilder/Fighting/rock1.png"), pygame.image.load("bilder/Fighting/paper1.png"), pygame.image.load("bilder/Fighting/scissors1.png")]
 comp_bilder = [0, pygame.image.load("bilder/Fighting/rock2.png"), pygame.image.load("bilder/Fighting/paper2.png"), pygame.image.load("bilder/Fighting/scissors2.png")]
-# play- und comp_bilder sind die Listen, die die bilder für den Game-Status "fighting" beinhalten
+# play- und comp_bilder sind die Listen, die die Bilder für den Game-Status "fighting" beinhalten
 # so wird dargestellt, wer welche Figur gewählt hat.
 
 # Spielvariablen initialisieren
@@ -56,9 +49,6 @@ hintergrundfarbe = "blue"
 spielerfigur = figuren[0]
 computerfigur = figuren[0]
 zufallsgenerator = True
-'''sound_play1 = False
-sound_play2 = False
-sound_play3 = False'''
 comp_counter = 0
 play_counter = 0
 win = 0         # win = 1 bedeutet Spieler hat gewonnen, win = 2 bedeutet Computer hat gewonnen
@@ -69,9 +59,6 @@ win = 0         # win = 1 bedeutet Spieler hat gewonnen, win = 2 bedeutet Comput
 startbild = pygame.image.load("bilder/rockpaperscissors.png")
 # Bilder für den Game-Status "fighting", bzw. Darstellung des Spielausgangs
 winning = pygame.image.load("bilder/win.png")
-winning_groesse = winning.get_rect()
-winning = pygame.transform.scale(winning, (512, 512))
-print(winning_groesse)              # drei Schritte, um die Bilder neu zu skalieren
 losing = pygame.image.load("bilder/lose.png")
 draw = pygame.image.load("bilder/draw.png")
 
@@ -105,25 +92,34 @@ while RUNNING:
     # Menu wird geöffnet
     if game_state == "lower_menu":
         # Abfrage der Hintergrundfarbe, die hier verändert werden kann
-        if game_state == "main_menu":
-            if hintergrundfarbe == "pink":
-                display.fill((253, 172, 226))
-            if hintergrundfarbe == "yellow":
-                 display.fill((249, 211, 35))
-            if hintergrundfarbe == "blue":
-                display.fill((49, 26, 209))
+        if hintergrundfarbe == "pink":
+            display.fill((253, 172, 226))
+        if hintergrundfarbe == "yellow":
+             display.fill((249, 211, 35))
+        if hintergrundfarbe == "blue":
+            display.fill((49, 26, 209))
 
         # Text zur Beschriftung der Buttons
         draw_text("Sound:", font1, TEXT_COL, 20, 200)
         draw_text("Background:", font1, TEXT_COL, 20, 340)
         draw_text("Music:", font1, TEXT_COL, 20, 480)
+
         # Abbilden der Musicbuttons und Abfragen deren Staten
         if Buttons.music1_button.draw(display):
-            print("eins")
+            pygame.mixer.music.stop()
+            music3 = pygame.mixer.music.load("sound/mixkit-ahead-of-time-842.mp3")
+            pygame.mixer.music.set_volume(1.0)
+            pygame.mixer.music.play(-1)
         if Buttons.music2_button.draw(display):
-            print("zwei")
+            pygame.mixer.music.stop()
+            music1 = pygame.mixer.music.load("sound/mixkit-comical-2.mp3")
+            pygame.mixer.music.set_volume(1.0)
+            pygame.mixer.music.play(-1)
         if Buttons.music3_button.draw(display):
-            print("drei")
+            pygame.mixer.music.stop()
+            music2 = pygame.mixer.music.load("sound/joker-boy-109889.mp3")
+            pygame.mixer.music.set_volume(1.0)
+            pygame.mixer.music.play(-1)
         # Abbilden der Colorbuttons
         if Buttons.blue_button.draw(display):
             hintergrundfarbe = "blue"
@@ -138,6 +134,7 @@ while RUNNING:
             draw_sound.set_volume(0.5)
             Buttons.clicked_sound.set_volume(1.0)
         if Buttons.mute_button.draw(display):
+            pygame.mixer.music.stop()
             winning_sound.set_volume(0.0)
             losing_sound.set_volume(0.0)
             draw_sound.set_volume(0.0)
@@ -158,11 +155,13 @@ while RUNNING:
              display.fill((249, 211, 35))
         if hintergrundfarbe == "blue":
             display.fill((49, 26, 209))
+
         # Score wird dargestellt
         draw_text("Your Score:", font2, TEXT_COL, 20, 20)
         draw_text(play_counter, font2, TEXT_COL, 290, 20)
         draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
         draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
+
         # Spielfiguren abgebildet und Status abgefragt
         if Buttons.rock_button.draw(display):
             spielerfigur = figuren[1]
@@ -192,11 +191,6 @@ while RUNNING:
             if spielerfigur == computerfigur:
                 win = 3
 
-                '''if spielerfigur == computerfigur:   # funktioniert nicht ganz
-                    def draw_text(text, font1, text_col, x, y):
-                        img = font.render(str('Unentschieden'),font1, TEXT_COL)
-                        display.blit(img, (200, 400))
-                    print("Unentschieden")'''
             else:
                 if spielerfigur == "Schere":
                     if computerfigur == "Stein":
@@ -232,6 +226,7 @@ while RUNNING:
              display.fill((249, 211, 35))
         if hintergrundfarbe == "blue":
             display.fill((49, 26, 209))
+
         # Spieler hat gewonnen
         if win == 1:
             sound_play = True
@@ -277,11 +272,13 @@ while RUNNING:
              display.fill((249, 211, 35))
         if hintergrundfarbe == "blue":
             display.fill((49, 26, 209))
+
         # Darstellung von Spielstand
         draw_text("Your Score:", font2, TEXT_COL, 20, 20)
         draw_text(play_counter, font2, TEXT_COL, 290, 20)
         draw_text("Computer Score:", font2, TEXT_COL, 830, 20)
         draw_text(comp_counter, font2, TEXT_COL, 1210, 20)
+
         # Abbilden und Abfragen der Buttons, Variablen werden in den Startzustand versetzt
         if Buttons.continue_button.draw(display):
             pygame.time.wait(250)
@@ -305,6 +302,4 @@ while RUNNING:
         if event.type == pygame.QUIT:
             sys.exit()
 
-
-        pygame.QUIT
         pygame.display.update()
